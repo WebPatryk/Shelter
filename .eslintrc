@@ -7,7 +7,8 @@
     "document": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-props-no-spreading": "off"
   },
   "parserOptions": {
     "ecmaVersion": 11
