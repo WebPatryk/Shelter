@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
  body{
      font-size:1.6rem;
      font-family: 'Source Sans Pro', sans-serif;
+     letter-spacing:1.4;
  }
 `;
 

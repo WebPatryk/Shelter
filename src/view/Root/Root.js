@@ -1,16 +1,23 @@
 import React from 'react';
-import Button from 'components/Button/Button';
 import GlobalStyle from 'theme/GlobalStyle';
+import Login from 'view/Login/Login';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const Root = () => (
   <>
     <GlobalStyle />
-    <p>
-      React app Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus qui odit
-      voluptates nesciunt officiis. Ab saepe aut inventore blanditiis magni facilis laboriosam
-      voluptatem quibusdam, impedit non cumque sit tenetur nesciunt?
-    </p>
-    <Button>Lorem ipsum</Button>
+    {/* <Navigation/> */}
+    <Router>
+      <Switch>
+        <Route exact path="/">
+          {/* <Home /> */}
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">{/* <Register /> */}</Route>
+      </Switch>
+    </Router>
   </>
 );
 

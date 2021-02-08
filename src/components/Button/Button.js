@@ -1,20 +1,23 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import themeButton from 'theme/themeVariables';
 
 const Button = styled.button`
-  background: ${props => (props.primary ? 'orange' : 'transparent')};
+  background-color: ${themeButton.primary};
   color: ${({ primary }) => (primary ? '#fff' : '#000')};
-  border: 2px solid orange;
-  font-size: 1rem;
-  ${({ primary }) =>
-    primary &&
-    css`
-      font-size: 5rem;
-      font-weight: bold;
-    `};
+  font-size: 1.6rem;
+  font-weight: 600;
+  border: none;
+  outline: none;
   margin: 1em;
+  letter-spacing: 2.4;
   padding: 1rem 3rem;
-  border: 2px solid palevioletred;
   border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export default Button;
