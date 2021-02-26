@@ -2,6 +2,7 @@ import React from 'react';
 import ImageAside from 'components/ImageAside/ImageAside';
 import LoginBox from 'components/LoginBox/LoginBox';
 import styled from 'styled-components';
+import mainDog from 'assets/images/main-dog.svg';
 
 const Main = styled.main`
   display: flex;
@@ -10,17 +11,13 @@ const Main = styled.main`
     flex-direction: column;
   }
 `;
-const LoginBoxComponent = styled(LoginBox)`
-  @media (max-width: 800px) {
-    order: -1;
-  }
-`;
+
 function Login() {
   return (
     <>
       <Main>
-        <ImageAside />
-        <LoginBoxComponent />
+        <ImageAside photo={mainDog} />
+        <LoginBox />
       </Main>
     </>
   );

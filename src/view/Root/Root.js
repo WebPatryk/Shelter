@@ -1,6 +1,7 @@
 import React from 'react';
 import GlobalStyle from 'theme/GlobalStyle';
 import Login from 'view/Login/Login';
+import Register from 'view/Register/Register';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const Root = () => (
@@ -15,7 +16,9 @@ const Root = () => (
         <Route path="/login">
           <Login />
         </Route>
-        <Route path="/register">{/* <Register /> */}</Route>
+        <Route path="/register">
+          <Register />
+        </Route>
       </Switch>
     </Router>
   </>

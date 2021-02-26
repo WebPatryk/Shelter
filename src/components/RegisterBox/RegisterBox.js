@@ -62,18 +62,37 @@ const Label = styled.label`
 
 const Input = styled.input`
   border: none;
-  transform: translateY(0);
   border-bottom: 1px solid #ffd5ae;
   margin: 1rem 0;
   padding: 1rem 0.5rem;
   font-size: 2rem;
   color: #ffd5ae;
   outline: none;
-  transform: translateY(0);
 
   &:focus ~ ${Label}, &:valid ~ ${Label} {
     transform: translateY(-30px);
     font-size: 1.4rem;
+  }
+`;
+const LineContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  p {
+    padding: 0.5rem 1rem;
+    background-color: #c4c4c4;
+    border-radius: 50%;
+  }
+`;
+
+const Line = styled.div`
+  width: 50%;
+  height: 1px;
+  background-color: #c4c4c4;
+  margin-right: 2rem;
+
+  &:last-child {
+    margin-left: 2rem;
   }
 `;
 
@@ -83,7 +102,7 @@ const SubTitle = styled.p`
   font-size: 2.7rem;
 `;
 
-function LoginBox() {
+function RegisterBox() {
   return (
     <Container>
       <img
@@ -91,28 +110,44 @@ function LoginBox() {
         alt="dog paw"
         style={{ width: 150 }}
       />
-      <Title>Login</Title>
-      <SubTitle> To animals word’s</SubTitle>
+      <Title>Sign up</Title>
+      <SubTitle>To animals word’s</SubTitle>
       <Form>
         <InputWrapper>
           <Input type="text" required />
           <Label>Username</Label>
         </InputWrapper>
         <InputWrapper>
+          <Input type="email" required />
+          <Label>E-mail</Label>
+        </InputWrapper>
+        <InputWrapper>
           <Input type="password" required />
           <Label>Password</Label>
         </InputWrapper>
+        <InputWrapper>
+          <Input type="text" required />
+          <Label>Pupil name</Label>
+        </InputWrapper>
 
-        <Button primary>Login</Button>
+        <Button primary>Sign up</Button>
         <RegisterBlock>
-          <Text>Don’t have an account yet?</Text>
+          <Text>Already have an account yet?</Text>
           <StyledLink to="/register">
-            <Register>Sign up</Register>
+            <Register>Log in </Register>
           </StyledLink>
         </RegisterBlock>
+        <div>
+          <LineContainer>
+            <Line />
+            <p>or</p>
+            <Line />
+          </LineContainer>
+          <Button facebook>Sign up with facebook</Button>
+        </div>
       </Form>
     </Container>
   );
 }
 
-export default LoginBox;
+export default RegisterBox;

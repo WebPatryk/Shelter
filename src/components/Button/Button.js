@@ -1,5 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import themeButton from 'theme/themeVariables';
+
+import facebookLogo from 'assets/images/facebook.svg';
 
 const Button = styled.button`
   background-color: ${themeButton.primary};
@@ -14,6 +16,21 @@ const Button = styled.button`
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+
+  ${({ facebook }) =>
+    facebook &&
+    css`
+      background-color: #4064ac;
+      color: #fff;
+      font-weight: 400;
+      background-image: url(${facebookLogo});
+      background-repeat: no-repeat;
+      background-position: 5%;
+      width: 100%;
+      margin: 1rem 0 0;
+      text-align: right;
+      padding: 1.3rem 3rem;
+    `}
 
   &:hover {
     opacity: 0.8;
