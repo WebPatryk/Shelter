@@ -127,7 +127,7 @@ function RegisterBox() {
         </InputWrapper>
         <InputWrapper>
           <Input type="text" required />
-          <Label>Pupil name</Label>
+          <Label>Pupil&apos;s name</Label>
         </InputWrapper>
 
         <Button primary>Sign up</Button>
