@@ -3,6 +3,7 @@ import GlobalStyle from 'theme/GlobalStyle';
 import Login from 'view/Login/Login';
 import Register from 'view/Register/Register';
 import Events from 'view/Events/Events';
+import Home from 'view/Home/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const Root = () => (
@@ -12,7 +13,7 @@ const Root = () => (
     <Router>
       <Switch>
         <Route exact path="/">
-          {/* <Home /> */}
+          <Home />
         </Route>
         <Route path="/login">
           <Login />

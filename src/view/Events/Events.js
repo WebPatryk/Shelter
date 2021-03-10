@@ -41,7 +41,7 @@ function Events() {
           <h3>{isLoading && 'Logowanie...'}</h3>
           {fetchError}
           {animalsEvents && animalsEvents.length > 0 ? (
-            animalsEvents.map(animal => <Event {...animal} key={uuidv4} />)
+            animalsEvents.map(animal => <Event {...animal} key={uuidv4()} />)
           ) : (
             <p>Your&apos;s events weren&apos;t loaded </p>
           )}
