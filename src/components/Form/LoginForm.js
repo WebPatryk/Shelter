@@ -70,7 +70,7 @@ function LoginForm() {
   const onSubmit = data => console.log(data);
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
       <InputWrapper>
         <Input
           type="text"
