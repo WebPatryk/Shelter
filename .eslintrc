@@ -4,10 +4,13 @@
     "jest": true
   },
   "globals": {
-    "document": true
+    "document": true,
+    "window": true
   },
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
+    "react/jsx-props-no-spreading": "off",
+    "import/no-unresolved": "off"
   },
   "parserOptions": {
     "ecmaVersion": 11
