@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import themeButton from 'theme/themeVariables';
+import TheNewestEvent from './TheNewestEvent';
 import { db } from '../../firebase';
-import Event from './Event';
-import AddEvent from './AddEvent';
 
 const Main = styled.div`
   /* display: flex; */
@@ -14,13 +13,9 @@ const Main = styled.div`
   }
 `;
 const EventContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  justify-items: center;
-  align-items: center;
+  display: flex;
 `;
 const Title = styled.h1`
-  text-align: center;
   color: ${themeButton.fourth};
   margin: 4rem 0;
   font-size: 4rem;
@@ -33,6 +28,7 @@ function Events() {
 
   useEffect(() => {
     db.collection('events')
+      .limit(3)
       .get()
       .then(snap => {
         setIsLoading(false);
@@ -46,13 +42,15 @@ function Events() {
   return (
     <>
       <Main>
-        <Title>Your latest events! </Title>
+        <Title>Upcoming Events! </Title>
         <h3>{isLoading && 'Logowanie...'}</h3>
-        <AddEvent />
+
         <EventContainer>
           {fetchError}
           {animalsEvents ? (
-            animalsEvents.map(animal => <Event {...animal} key={uuidv4()} />)
+            animalsEvents.map(animal => (
+              <TheNewestEvent {...animal} key={uuidv4()} />
+            ))
           ) : (
             <p>Your&apos;s events weren&apos;t loaded </p>
           )}
