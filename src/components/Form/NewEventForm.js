@@ -1,38 +1,13 @@
 import React from 'react';
 import Button from 'components/Button/Button';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import 'firebase/auth';
-import firebase from 'firebase/app';
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
 
-const Register = styled.strong`
-  color: #da8230;
-  text-decoration: none;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.5;
-  }
-`;
-
-const Text = styled.p`
-  color: #979797;
-  margin-right: 1rem;
-`;
-const RegisterBlock = styled.div`
-  display: flex;
-  align-items: center;
-`;
 const InputWrapper = styled.div`
   position: relative;
 `;
@@ -67,28 +42,9 @@ const Error = styled.p`
   color: red;
 `;
 
-function LoginForm() {
+function NewEventForm() {
   const { register, handleSubmit, errors } = useForm();
-  const onSubmit = data => {
-    console.log(data);
-    const { userName, password } = data;
-
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(userName, password)
-      .then(userCredential => {
-        // Signed in
-        // const { user } = userCredential;
-        console.log('user has been loggin', userCredential);
-        // ...
-      })
-      .catch(error => {
-        console.log(error);
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // ..
-      });
-  };
+  const onSubmit = data => console.log(data);
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
@@ -99,7 +55,7 @@ function LoginForm() {
           ref={register({ required: true })}
           required
         />
-        <Label>Username</Label>
+        <Label>Name</Label>
       </InputWrapper>
       {errors.userName && <Error>&#9888; This field is required</Error>}
       <InputWrapper>
@@ -109,20 +65,25 @@ function LoginForm() {
           ref={register({ required: true })}
           required
         />
-        <Label>Password</Label>
+        <Label>Description</Label>
       </InputWrapper>
       {errors.password && <Error> &#9888; This field is required</Error>}
+
+      <InputWrapper>
+        <Input
+          type="password"
+          name="password"
+          ref={register({ required: true })}
+          required
+        />
+        <Label>Localization</Label>
+      </InputWrapper>
+
       <Button primary type="submit">
-        Login
+        Add
       </Button>
-      <RegisterBlock>
-        <Text>Don’t have an account yet?</Text>
-        <StyledLink to="/register">
-          <Register>Sign up</Register>
-        </StyledLink>
-      </RegisterBlock>
     </Form>
   );
 }
 
-export default LoginForm;
+export default NewEventForm;

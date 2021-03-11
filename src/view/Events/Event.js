@@ -10,6 +10,7 @@ const Main = styled.div`
   align-items: center;
   margin: 2rem;
   padding: 0 2rem;
+  width: 400px;
 `;
 const Figcaption = styled.p`
   width: 200px;
@@ -31,15 +32,18 @@ const TimeBar = styled.div`
   width: 100%;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  max-height: 60px;
 
   p {
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-right: 2rem;
   }
   span {
     font-size: 1.5rem;
     justify-self: flex-end;
+    font-weight: bold;
+    letter-spacing: 1px;
   }
 `;
 const TimeContaine = styled.div`
