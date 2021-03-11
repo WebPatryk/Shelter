@@ -32,6 +32,13 @@ const Button = styled.button`
       padding: 1.3rem 3rem;
     `}
 
+  ${({ fourth }) =>
+    fourth &&
+    css`
+      background-color: ${themeButton.fourth};
+      color: #fff;
+    `}
+
   &:hover {
     opacity: 0.8;
   }
