@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import themeButton from 'theme/themeVariables';
 import { db } from '../../firebase';
 import Event from './Event';
 
@@ -12,8 +13,16 @@ const Main = styled.div`
   }
 `;
 const EventContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  justify-items: center;
+  align-items: center;
+`;
+const Title = styled.h1`
+  text-align: center;
+  color: ${themeButton.fourth};
+  margin: 4rem 0;
+  font-size: 4rem;
 `;
 
 function Events() {
@@ -36,9 +45,9 @@ function Events() {
   return (
     <>
       <Main>
-        <h1>Your latest events! </h1>
+        <Title>Your latest events! </Title>
+        <h3>{isLoading && 'Logowanie...'}</h3>
         <EventContainer>
-          <h3>{isLoading && 'Logowanie...'}</h3>
           {fetchError}
           {animalsEvents && animalsEvents.length > 0 ? (
             animalsEvents.map(animal => <Event {...animal} key={uuidv4()} />)
