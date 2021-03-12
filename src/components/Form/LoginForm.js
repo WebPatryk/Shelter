@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'components/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import 'firebase/auth';
 import firebase from 'firebase/app';
+import { useSelector, useDispatch } from 'react-redux';
+import { LoginUser } from 'redux/user/action';
 
 const Form = styled.form`
   display: flex;
@@ -67,41 +69,55 @@ const Error = styled.p`
   color: red;
 `;
 
+const NoUserInfo = styled.span`
+  font-size: 1.6rem;
+  color: red;
+  max-width: 300px;
+  text-align: center;
+`;
+
 function LoginForm() {
-  const { register, handleSubmit, errors } = useForm();
+  const history = useHistory();
+  const [noUser, setNoUser] = useState(false);
+
+  const sel = useSelector(state => state.loginReducer);
+  const dispatch = useDispatch();
+
+  const { register, handleSubmit, errors, reset } = useForm();
   const onSubmit = data => {
-    console.log(data);
-    const { userName, password } = data;
+    const { email, password } = data;
 
     firebase
       .auth()
-      .createUserWithEmailAndPassword(userName, password)
+      .signInWithEmailAndPassword(email, password)
       .then(userCredential => {
-        // Signed in
-        // const { user } = userCredential;
-        console.log('user has been loggin', userCredential);
-        // ...
+        const { user } = userCredential;
+
+        console.log('user has been loggin', user);
+
+        dispatch(LoginUser());
+        history.push('/');
       })
       .catch(error => {
-        console.log(error);
-        // const errorCode = error.code;
-        // const errorMessage = error.message;
-        // ..
+        reset('');
+        setNoUser(error.message);
       });
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
+      {noUser && <NoUserInfo>{noUser}</NoUserInfo>}
       <InputWrapper>
         <Input
           type="text"
-          name="userName"
+          name="email"
           ref={register({ required: true })}
           required
         />
-        <Label>Username</Label>
+        <Label>Email</Label>
       </InputWrapper>
-      {errors.userName && <Error>&#9888; This field is required</Error>}
+      {errors.email && <Error>&#9888; This field is required</Error>}
+      {sel}
       <InputWrapper>
         <Input
           type="password"

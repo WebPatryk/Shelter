@@ -6,16 +6,17 @@ import Events from 'view/Events/Events';
 import Navigation from 'components/Navigation/Navigation';
 import Home from 'view/Home/Home';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import PrivateRoute from 'helpers/PrivateRoute';
 
 const Root = () => (
   <>
     <GlobalStyle />
     <Router>
-      <Navigation />
       <Switch>
-        <Route exact path="/">
+        <PrivateRoute exact path="/">
+          <Navigation />
           <Home />
-        </Route>
+        </PrivateRoute>
         <Route path="/login">
           <Login />
         </Route>
@@ -23,6 +24,7 @@ const Root = () => (
           <Register />
         </Route>
         <Route path="/events">
+          <Navigation />
           <Events />
         </Route>
       </Switch>

@@ -12,7 +12,7 @@ const Main = styled.main`
   }
 `;
 
-function Login() {
+function Register() {
   return (
     <>
       <Main>
@@ -23,4 +23,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
