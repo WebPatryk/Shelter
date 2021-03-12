@@ -1,7 +1,10 @@
 import React from 'react';
 import Button from 'components/Button/Button';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
+import 'firebase/auth';
+import firebase from 'firebase/app';
 
 const Container = styled.main`
   display: flex;
@@ -101,8 +104,31 @@ const SubTitle = styled.p`
   font-weight: 600;
   font-size: 2.7rem;
 `;
+const Error = styled.p`
+  color: red;
+`;
 
 function RegisterBox() {
+  const history = useHistory();
+  const { register, handleSubmit, errors, reset } = useForm();
+  const onSubmit = data => {
+    const { email, password } = data;
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        const { user } = userCredential;
+
+        console.log('user has been creted', user);
+
+        history.push('/');
+      })
+      .catch(error => {
+        reset('');
+        console.log(error.message);
+      });
+  };
   return (
     <Container>
       <img
@@ -112,23 +138,37 @@ function RegisterBox() {
       />
       <Title>Sign up</Title>
       <SubTitle>To animals word’s</SubTitle>
-      <Form>
+      <Form onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
         <InputWrapper>
-          <Input type="text" required />
+          <Input
+            type="text"
+            required
+            name="username"
+            ref={register({ required: true, minLength: 6 })}
+          />
           <Label>Username</Label>
         </InputWrapper>
+        {errors.username && <Error>&#9888; This field is required</Error>}
         <InputWrapper>
-          <Input type="email" required />
+          <Input type="email" required name="email" />
           <Label>E-mail</Label>
         </InputWrapper>
+        {errors.email && <Error>&#9888; This field is required</Error>}
         <InputWrapper>
-          <Input type="password" required />
+          <Input
+            type="password"
+            required
+            name="password"
+            ref={register({ required: true, minLength: 6 })}
+          />
           <Label>Password</Label>
+          {errors.password && <Error>&#9888; This field is required</Error>}
         </InputWrapper>
         <InputWrapper>
-          <Input type="text" required />
+          <Input type="text" required name="pupil" />
           <Label>Pupil&apos;s name</Label>
         </InputWrapper>
+        {errors.pupil && <Error>&#9888; This field is required</Error>}
 
         <Button primary>Sign up</Button>
         <RegisterBlock>
